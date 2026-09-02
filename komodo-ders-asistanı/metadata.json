@@ -1,0 +1,6 @@
+{
+  "name": "Komodo Odak",
+  "description": "Kapsamlı Komodo ders odaklanma takipçisi, pomodoro sayacı, sınıf ve derslere göre videolu ders kanalları rehberi, soru ve hedef takipçisi.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
