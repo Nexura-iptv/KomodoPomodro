@@ -31,6 +31,16 @@ jobs:
           gradle-version: 9.3.1
           build-root-directory: ./komodo-ders-asistanı
 
+      - name: Create .env.example if missing
+        run: |
+          if [ ! -f ".env.example" ]; then
+            touch .env.example
+            echo "# Default env" >> .env.example
+          fi
+          if [ ! -f ".env" ]; then
+            touch .env
+          fi
+
       - name: Run Unit Tests
         run: gradle testDebugUnitTest --no-daemon
 
