@@ -11,6 +11,11 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
+    # Tüm adımların komodo-ders-asistanı klasöründe çalışmasını sağlar:
+    defaults:
+      run:
+        working-directory: ./komodo-ders-asistanı
+
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -25,6 +30,7 @@ jobs:
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: 8.9
+          build-root-directory: ./komodo-ders-asistanı
 
       - name: Run Unit Tests
         run: gradle testDebugUnitTest --no-daemon
@@ -35,5 +41,5 @@ jobs:
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
         with:
-          name: app-debug-apk
-          path: app/build/outputs/apk/debug/*.apk
+          name: komodo-odak-debug-apk
+          path: ./komodo-ders-asistanı/app/build/outputs/apk/debug/*.apk
