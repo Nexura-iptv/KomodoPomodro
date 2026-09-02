@@ -11,11 +11,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    # Eğer projeniz bir alt klasördeyse aşağıdaki satırı aktif edin (ör: working-directory: ./komodo-ders-asistanı)
-    # defaults:
-    #   run:
-    #     working-directory: ./
-
     steps:
       - name: Checkout Repository
         uses: actions/checkout@v4
@@ -28,22 +23,14 @@ jobs:
 
       - name: Setup Gradle
         uses: gradle/actions/setup-gradle@v4
-
-      - name: Generate Gradle Wrapper if missing
-        run: |
-          if [ ! -f "gradlew" ]; then
-            echo "gradlew bulunamadı, oluşturuluyor..."
-            curl -sSL https://raw.githubusercontent.com/gradle/gradle/master/gradlew -o gradlew
-            chmod +x gradlew
-          else
-            chmod +x gradlew
-          fi
+        with:
+          gradle-version: 8.9
 
       - name: Run Unit Tests
-        run: ./gradlew testDebugUnitTest --no-daemon
+        run: gradle testDebugUnitTest --no-daemon
 
       - name: Build Debug APK
-        run: ./gradlew assembleDebug --no-daemon
+        run: gradle assembleDebug --no-daemon
 
       - name: Upload Debug APK Artifact
         uses: actions/upload-artifact@v4
